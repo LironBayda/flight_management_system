@@ -1,6 +1,7 @@
+
 CREATE TABLE countries (
 	id  SERIAL PRIMARY KEY,
-	name TEXT
+	country_name TEXT
 );
 
 CREATE TABLE user_roles (
@@ -11,7 +12,7 @@ CREATE TABLE user_roles (
 CREATE TABLE users (
 	id  SERIAL PRIMARY KEY   ,
 	username text unique,
-	password text,
+	user_password text,
 	email text unique,
 	user_role int,
     FOREIGN KEY (user_role) REFERENCES user_roles(id)
@@ -22,7 +23,7 @@ CREATE TABLE users (
 
 CREATE TABLE airline_company (
 	id  SERIAL PRIMARY KEY   ,
-	name text unique ,
+	airline_company_name text unique ,
 	country_id INT,
 	user_id INT unique,
 
@@ -71,7 +72,7 @@ CREATE TABLE administrators (
 	id  SERIAL PRIMARY KEY,
 	first_name text,
 	last_name text,
-	level int,
+	administrator_level int,
 	user_id bigint unique,
 	FOREIGN KEY (user_id) REFERENCES users(id)
 
