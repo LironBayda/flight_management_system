@@ -1,0 +1,10 @@
+C:\Users\liron\Source\Repos\flight management system\flight management system\bin\Debug\netcoreapp3.1\flight management system.deps.json
+C:\Users\liron\Source\Repos\flight management system\flight management system\bin\Debug\netcoreapp3.1\flight management system.dll
+C:\Users\liron\Source\Repos\flight management system\flight management system\obj\Debug\netcoreapp3.1\flight management system.csprojAssemblyReference.cache
+C:\Users\liron\Source\Repos\flight management system\flight management system\obj\Debug\netcoreapp3.1\flight management system.AssemblyInfoInputs.cache
+C:\Users\liron\Source\Repos\flight management system\flight management system\obj\Debug\netcoreapp3.1\flight management system.AssemblyInfo.cs
+C:\Users\liron\Source\Repos\flight management system\flight management system\bin\Debug\netcoreapp3.1\flight management system.pdb
+C:\Users\liron\Source\Repos\flight management system\flight management system\obj\Debug\netcoreapp3.1\flight management system.dll
+C:\Users\liron\Source\Repos\flight management system\flight management system\obj\Debug\netcoreapp3.1\flight management system.pdb
+C:\Users\liron\Source\Repos\flight management system\flight management system\obj\Debug\netcoreapp3.1\flight management system.csproj.CoreCompileInputs.cache
+C:\Users\liron\Source\Repos\flight management system\flight management system\bin\Debug\netcoreapp3.1\log4net.config

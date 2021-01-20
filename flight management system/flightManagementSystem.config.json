@@ -1,0 +1,7 @@
+{
+  "flightManagementSystemConfig": {
+    "ConnectionString": "Host=localhost;Username=postgres;Password=Admin;Database=flight management system",
+    "AllowDBWrite": "TRUE",
+    "AppName": "Flight Management System"
+  }
+}
