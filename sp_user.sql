@@ -31,12 +31,45 @@ returns void
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION remove_user(user_id int)
+CREATE OR REPLACE FUNCTION remove_user(remove_id int)
 returns void
- AS
+ as
     $$
-    BEGIN
-        delete from users where id=user_id;
+    declare 
+
+           id_of_aircompany_with_remove_id int;
+           id_of_customer_with_remove_id int ;         
+             id_of_flight_with_aircompany_that_has_remove_id  int;            
+    
+    
+    begin
+         
+          select id  into id_of_aircompany_with_remove_id
+         from airline_company 
+                     where user_id =remove_id;
+                     
+            select id  into id_of_customer_with_remove_id
+         from customers where user_id =remove_id;
+                    
+         select id  into id_of_flight_with_aircompany_that_has_remove_id
+         from flight where airline_company_id in (id_of_aircompany_with_remove_id);
+                    
+                     
+	    
+	    delete from  tickets  where flight_id in 
+         (id_of_flight_with_aircompany_that_has_remove_id) or 
+         customer_id in (id_of_customer_with_remove_id);
+
+	    delete from  flight  where airline_company_id  in
+         (id_of_aircompany_with_remove_id);
+      
+        
+       delete  from airline_company where user_id =remove_id;
+       delete  from customers where user_id =remove_id;
+       delete  from administrators where user_id =remove_id;
+      delete from  users where id=remove_id;
+
+
     END;
 $$ LANGUAGE plpgsql;
 
