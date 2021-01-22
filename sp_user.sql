@@ -1,0 +1,52 @@
+
+CREATE OR REPLACE FUNCTION get_user(user_id int )
+returns TABLE(id_num int,username text,password text, email text, user_role int)
+ AS
+    $$
+    BEGIN
+        RETURN QUERY
+        select * from users  where id = user_id ;
+       END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_users( )
+returns TABLE(id_num int,username text,password text, email text, user_role int)
+ AS
+    $$
+    BEGIN
+        RETURN QUERY
+         select * from users;
+    END;
+$$ LANGUAGE plpgsql;
+
+drop function add_user(_username text,_user_password text, _email text, _user_role int);
+CREATE OR REPLACE FUNCTION add_user(_username text,_user_password text, _email text, _user_role int)
+returns void
+ AS
+    $$
+    BEGIN
+        insert into users ( username ,user_password , email , user_role ) 
+       values ( _username ,_user_password , _email ,_user_role);
+    END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION remove_user(user_id int)
+returns void
+ AS
+    $$
+    BEGIN
+        delete from users where id=user_id;
+    END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION update_user(_id_num int,_username text,_user_password text, _email text, _user_role int)
+returns void
+ AS
+   $$
+    BEGIN
+        update users 
+       set id=_id_num ,username=_username ,user_password=_user_password, email=_email , user_role=_user_role
+      where id=_id_num;
+    END;
+$$ LANGUAGE plpgsql;
