@@ -54,7 +54,7 @@ returns void
          
           select id  into id_of_aircompany_with_remove_id
          from airline_company 
-                     where id =remove_id;
+                     where country_id =remove_id;
                      
            select id  into id_of_flight_with_remove_id 
            from flight 
