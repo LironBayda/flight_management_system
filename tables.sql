@@ -25,16 +25,15 @@ CREATE TABLE airline_companies (
 	id  SERIAL PRIMARY KEY   ,
 	airline_company_name text unique ,
 	country_id INT,
-	user_id INT unique,
+	user_id bigint unique,
 
     FOREIGN KEY (country_id) REFERENCES countries(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 
 );
-
 CREATE TABLE flight (
 	id  SERIAL PRIMARY KEY   ,
-	airline_company_id INT,
+	airline_company_id bigint,
 	origin_country_id INT,
 	destination_country_id INT,
 	departure_time timestamp ,
