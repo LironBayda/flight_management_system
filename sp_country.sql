@@ -53,7 +53,7 @@ returns void
                         where country_id=remove_id );
          
           select id  into id_of_aircompany_with_remove_id
-         from airline_company 
+         from airline_companies 
                      where country_id =remove_id;
                      
            select id  into id_of_flight_with_remove_id 
