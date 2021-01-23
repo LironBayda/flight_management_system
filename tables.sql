@@ -21,7 +21,7 @@ CREATE TABLE users (
 
 
 
-CREATE TABLE airline_company (
+CREATE TABLE airline_companies (
 	id  SERIAL PRIMARY KEY   ,
 	airline_company_name text unique ,
 	country_id INT,
@@ -31,6 +31,7 @@ CREATE TABLE airline_company (
     FOREIGN KEY (user_id) REFERENCES users(id)
 
 );
+
 CREATE TABLE flight (
 	id  SERIAL PRIMARY KEY   ,
 	airline_company_id INT,
