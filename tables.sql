@@ -42,7 +42,7 @@ CREATE TABLE flight (
 	remaining_tickets INT,
     FOREIGN KEY (airline_company_id) REFERENCES countries(id),
     FOREIGN KEY (origin_country_id) REFERENCES countries(id),
-    FOREIGN KEY (airline_company_id) REFERENCES airline_company(id)
+    FOREIGN KEY (airline_company_id) REFERENCES airline_companies(id)
 
 );
 
