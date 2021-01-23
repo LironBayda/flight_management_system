@@ -45,7 +45,7 @@ returns void
     begin
          
           select id  into id_of_aircompany_with_remove_id
-         from airline_company 
+         from airline_companies 
                      where user_id =remove_id;
                      
             select id  into id_of_customer_with_remove_id
