@@ -45,7 +45,6 @@ CREATE TABLE flights (
 
 );
 
-
 CREATE TABLE customers (
 	id   BIGSERIAL  PRIMARY KEY   ,
 	first_name text,
@@ -54,6 +53,7 @@ CREATE TABLE customers (
 	phone_no text unique ,
 	credit_card_no text unique,
 	user_id bigint unique,
+         VIP bool,
     FOREIGN KEY (user_id) REFERENCES users(id)
 
 );
