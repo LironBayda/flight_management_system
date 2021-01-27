@@ -47,7 +47,7 @@ $$ LANGUAGE plpgsql;
 
 
 
-CREATE OR REPLACE FUNCTION add_airline_companies(_airline_company_name text,_country_id bigint, _user_id bigint)
+CREATE OR REPLACE FUNCTION add_airline_company(_airline_company_name text,_country_id bigint, _user_id bigint)
 returns void
  AS
     $$
