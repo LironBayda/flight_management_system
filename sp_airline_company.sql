@@ -36,7 +36,7 @@ $$ LANGUAGE plpgsql;
 
 drop function get_airline_companies( );
 CREATE OR REPLACE FUNCTION get_airline_companies( )
-returns TABLE(id airline_company,airline_company_name text,country_id int, user_id bigint)
+returns TABLE(id bigint,airline_company_name text,country_id int, user_id bigint)
  AS
     $$
     BEGIN
