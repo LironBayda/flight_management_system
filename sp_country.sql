@@ -29,48 +29,41 @@ returns void
     END;
 $$ LANGUAGE plpgsql;
 
-
 CREATE OR REPLACE FUNCTION remove_country(remove_id bigint)
 returns void
  as
-    $$
-    declare 
-             id_of_flight_with_aircompany_that_has_remove_id  bigint;
-            
-           id_of_aircompany_with_remove_id bigint;
-    
-            id_of_flight_with_remove_id bigint;
-    
-    begin
+    $$ 
+          
+    begin                     
+       
+       --delete from ticket--
+        with 
+	
+        id_of_flight_with_aircompany_that_has_remove_id as          
+      (select id  from  flights  where airline_company_id in 
+      (select id from airline_companies where country_id =remove_id)), 
+      
+       id_of_flight_with_remove_id as  (select id from flights 
+      where origin_country_id =remove_id or destination_country_id =remove_id)       
 	    
-	    
-         
-          select id  into id_of_aircompany_with_remove_id
-         from airline_companies 
-                     where country_id =remove_id;
-                    
-       select id  into id_of_flight_with_aircompany_that_has_remove_id from  flight  
-       where airline_company_id in 
-                  (id_of_aircompany_with_remove_id);
-                     
-           select id  into id_of_flight_with_remove_id 
-           from flights 
-            where origin_country_id =remove_id or destination_country_id =remove_id;
-	    
-	    delete from  tickets  where flight_id in 
-         (id_of_flight_with_aircompany_that_has_remove_id) or 
-         flight_id in (id_of_flight_with_remove_id);
+       delete from  tickets  where flight_id in 
+       (select * from id_of_flight_with_aircompany_that_has_remove_id) or 
+       flight_id in (select * from id_of_flight_with_remove_id);
 
-	    delete from  flights  where airline_company_id  in
-         (id_of_Aircompany_with_remove_id) or 
-          origin_country_id =remove_id or 
-         destination_country_id =remove_id;
-        
-       delete  from airline_companies where country_id =remove_id;
+ --delete from flight--
+       delete from  flights  where airline_company_id  in
+       (select id from airline_companies where country_id =remove_id) or 
+       origin_country_id =remove_id or 
+       destination_country_id =remove_id;
+--delete from   airline_companies--      
+       delete  from airline_companies where country_id =remove_id;      
+
+--delete from   countries--       
        delete from countries where id=remove_id;
 
     END;
 $$ LANGUAGE plpgsql;
+       
 
 
 
