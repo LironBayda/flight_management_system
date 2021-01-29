@@ -50,15 +50,16 @@ returns void
        (select * from id_of_flight_with_aircompany_that_has_remove_id) or 
        flight_id in (select * from id_of_flight_with_remove_id);
 
- --delete from flight--
+       --delete from flight--
        delete from  flights  where airline_company_id  in
        (select id from airline_companies where country_id =remove_id) or 
        origin_country_id =remove_id or 
        destination_country_id =remove_id;
---delete from   airline_companies--      
+       
+       --delete from   airline_companies--      
        delete  from airline_companies where country_id =remove_id;      
 
---delete from   countries--       
+       --delete from   countries--       
        delete from countries where id=remove_id;
 
     END;
