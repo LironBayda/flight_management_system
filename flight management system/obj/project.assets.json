@@ -441,9 +441,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\liron\\Source\\Repos\\flight management system\\flight management system\\flight management system.csproj",
-      "projectName": "flight management system",
-      "projectPath": "C:\\Users\\liron\\Source\\Repos\\flight management system\\flight management system\\flight management system.csproj",
+      "projectUniqueName": "C:\\Users\\liron\\Source\\Repos\\flight management system\\flight management system\\flight management system_SQL.csproj",
+      "projectName": "flight management system_SQL",
+      "projectPath": "C:\\Users\\liron\\Source\\Repos\\flight management system\\flight management system\\flight management system_SQL.csproj",
       "packagesPath": "C:\\Users\\liron\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\liron\\Source\\Repos\\flight management system\\flight management system\\obj\\",
       "projectStyle": "PackageReference",

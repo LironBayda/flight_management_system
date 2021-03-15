@@ -5,28 +5,39 @@ using System.Text;
 
 namespace flight_management_system
 {
-    public class User_Role:IPoco
+    public class UserRole:IPoco
     {
         public int Id { get; set; }
-        public string Role_Name { get; set; }
+        public string RoleName { get; set; }
 
 
         public override string ToString()
         {
             return base.ToString() + JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-        public User_Role()
+        public UserRole()
         {
 
         }
 
-        public User_Role(int id, string role_Name)
+        public UserRole(int id)
         {
             Id = id;
-            Role_Name = role_Name;
+
+            switch (id) {
+                case 1:
+                    RoleName = "Administrator";
+                    break;
+                case 2:
+                    RoleName = "AirLineCompany";
+                    break;
+                case 3:
+                    RoleName ="Customer";
+                    break;
+            }
         }
 
-        public static bool operator ==(User_Role user_roles1, User_Role user_roles2)
+        public static bool operator ==(UserRole user_roles1, UserRole user_roles2)
         {
 
 
@@ -38,14 +49,14 @@ namespace flight_management_system
             return user_roles1.Id == user_roles2.Id;
         }
 
-        public static bool operator !=(User_Role user_roles1, User_Role user_roles2)
+        public static bool operator !=(UserRole user_roles1, UserRole user_roles2)
         {
             return !(user_roles1 == user_roles2);
         }
 
         public override bool Equals(object obj)
         {
-            User_Role user_roles = obj as User_Role;
+            UserRole user_roles = obj as UserRole;
             if (user_roles != null)
                 return this.Id == user_roles.Id;
 

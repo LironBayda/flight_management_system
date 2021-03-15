@@ -40,17 +40,17 @@ namespace flight_management_system
 
                     command.Parameters.AddRange(new NpgsqlParameter[]
                     {
-                    new NpgsqlParameter("_first_name", item.First_Name),
-                    new NpgsqlParameter("_last_name", item.Last_Name),
+                    new NpgsqlParameter("_first_name", item.FirstName),
+                    new NpgsqlParameter("_last_name", item.LastName),
                     new NpgsqlParameter("_administrator_level", item.Level),
-                    new NpgsqlParameter("_user_id", item.User_Id),
+                    new NpgsqlParameter("_user_id", item.UserId),
 
 
                     });
 
                     command.ExecuteNonQuery();
 
-                    my_logger.Info($"add item: First_Name={item.First_Name}, Last_Name={item.Last_Name}");
+                    my_logger.Info($"add item: First_Name={item.FirstName}, Last_Name={item.LastName}");
 
 
                 }
@@ -65,7 +65,6 @@ namespace flight_management_system
             else
             {
                 my_logger.Info("Tried to write into Db while in read-pnly mode");
-                Console.WriteLine($"Not allow to write into DB. check config");
             }
 
             conn.Close();
@@ -74,7 +73,7 @@ namespace flight_management_system
 
 
 
-        public List<Administrator> GatAll()
+        public List<Administrator> GetAll()
         {
             List<Administrator> administrators = new List<Administrator>();
 
@@ -93,23 +92,15 @@ namespace flight_management_system
                 var reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    my_logger.Info("in while- function GatAll return value");
-                    administrators.Add(new Administrator
-                    {
-                        Id = Convert.ToInt32(reader["id_num"]),
-                        First_Name = reader["first_name"].ToString(),
-                        Last_Name = reader["last_name"].ToString(),
-                        Level = Convert.ToInt32(reader["administrator_level"]),
-                        User_Id = Convert.ToInt32(reader["user_id"]),
-
-                    });
+                    my_logger.Info("in while- function GetAll return value");
+                    administrators.Add(getAdministratorFromReader(reader));
 
                 }
             }
             catch (Exception ex)
             {
                 my_logger.Error($"Failed to get all a. Error : {ex}");
-                my_logger.Error($"Run GatAll" +
+                my_logger.Error($"Run GetAll" +
                     $": [{sp_name}]");
             }
 
@@ -144,23 +135,15 @@ namespace flight_management_system
                 var reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    my_logger.Info("in if- function Gat return value");
+                    my_logger.Info("in if- function Get return value");
 
-                    administrator = new Administrator
-                    {
-                        Id = Convert.ToInt32(reader["id_num"]),
-                        First_Name = reader["first_name"].ToString(),
-                        Last_Name = reader["last_name"].ToString(),
-                        Level = Convert.ToInt32(reader["administrator_level"]),
-                        User_Id = Convert.ToInt32(reader["user_id"]),
-
-                    };
+                    administrator = getAdministratorFromReader( reader);
                 }
             }
             catch (Exception ex)
             {
                 my_logger.Error($"Failed to get dministrator. Error : {ex}");
-                my_logger.Error($"Run Gat" +
+                my_logger.Error($"Run Get" +
                     $": [{sp_name}]");
             }
 
@@ -169,6 +152,28 @@ namespace flight_management_system
 
             return administrator;
         }
+
+
+        Administrator getAdministratorFromReader(NpgsqlDataReader reader)
+        {
+            UserDAOPGSQL userDAOPGSQL = new UserDAOPGSQL();
+            return  new Administrator
+            {
+                Id = Convert.ToInt32(reader["id"]),
+                FirstName = reader["first_name"].ToString(),
+                LastName = reader["last_name"].ToString(),
+                Level = Convert.ToInt32(reader["administrator_level"]),
+                UserId = Convert.ToInt32(reader["user_id"]),
+                UserObj= userDAOPGSQL.Get(Convert.ToInt32(reader["user_id"]))
+
+            };
+
+
+
+        }
+
+
+
 
         public void Remove(Administrator item)
         {
@@ -226,16 +231,16 @@ namespace flight_management_system
 
                     command.Parameters.AddRange(new NpgsqlParameter[]
                     {
-                    new NpgsqlParameter("_administrator_id", item.Id),
-                    new NpgsqlParameter("_first_name", item.First_Name),
-                    new NpgsqlParameter("_last_name", item.Last_Name),
+                    new NpgsqlParameter("_administrator_id", item.Id   ),
+                    new NpgsqlParameter("_first_name", item.FirstName),
+                    new NpgsqlParameter("_last_name", item.LastName),
                     new NpgsqlParameter("_administrator_level", item.Level),
-                    new NpgsqlParameter("_user_id", item.User_Id),
+                    new NpgsqlParameter("_user_id", item.UserId),
 
                     });
 
                     command.ExecuteNonQuery();
-                    my_logger.Info($"update item: id={item.Id},  frist_name={item.First_Name}");
+                    my_logger.Info($"update item: id={item.Id},  frist_name={item.FirstName}");
                 }
                 catch (Exception ex)
                 {
@@ -250,7 +255,6 @@ namespace flight_management_system
             else
             {
                 my_logger.Info("Tried to write into Db while in read-pnly mode");
-                Console.WriteLine($"Not allow to write into DB. check config");
             }
         }
     }

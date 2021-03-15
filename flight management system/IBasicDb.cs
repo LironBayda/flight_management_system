@@ -9,7 +9,7 @@ namespace flight_management_system
     {
         void Add(T item);
         T Get(int id);
-        List<T> GatAll();
+        List<T> GetAll();
         void Remove(T item);
         void Update(T item);
 

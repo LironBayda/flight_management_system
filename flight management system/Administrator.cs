@@ -8,12 +8,12 @@ namespace flight_management_system
     public class Administrator : IPoco, IUser
     {
         public int Id { get; set; }
-        public string First_Name { get; set; }
-        public string Last_Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public int Level { get; set; }
-        public int User_Id { get; set; }
+        public int UserId { get; set; }
 
-        public User user { get; set; }
+        public User UserObj { get; set; }
 
 
         public override string ToString()
@@ -25,14 +25,14 @@ namespace flight_management_system
 
         }
 
-        public Administrator(int id, string first_Name, string last_Name, int level, int user_id, User user)
+        public Administrator(int id, string firstName, string lastName, int level, int userId, User userObj)
         {
             Id = id;
-            First_Name = first_Name;
-            Last_Name = last_Name;
+            FirstName = firstName;
+            LastName = lastName;
             Level = level;
-            User_Id = user_id;
-            this.user = user;
+            UserId = userId;
+            UserObj = userObj;
         }
 
         public static bool operator ==(Administrator administrator1, Administrator administrator2)

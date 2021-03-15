@@ -12,9 +12,9 @@ namespace flight_management_system
         public string Password { get; set; }
 
         public string Email { get; set; }
-        public int User_Role_Id { get; set; }
+        public int UserRoleId { get; set; }
 
-        public User_Role user_role { get; set; }
+        public UserRole UserRoleObj { get; set; }
 
         public override string ToString()
         {
@@ -25,14 +25,14 @@ namespace flight_management_system
 
         }
 
-        public User(int id, string username, string password, string email, int user_role_id, User_Role user_role)
+        public User(int id, string username, string password, string email, int userRoleId, UserRole userRoleObj)
         {
             Id = id;
             Username = username;
             Password = password;
             Email = email;
-            User_Role_Id = user_role_id;
-            this.user_role = user_role;
+            UserRoleId = userRoleId;
+            UserRoleObj = userRoleObj;
         }
 
         public static bool operator ==(User user1, User user2)

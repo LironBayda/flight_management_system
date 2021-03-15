@@ -5,18 +5,18 @@ using System.Text;
 
 namespace flight_management_system
 {
-    class Customer: IUser,IPoco
+   public class Customer: IUser,IPoco
     {
         public int Id { get; set; }
-        public string First_Name { get; set; }
-        public string Last_Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Address { get; set; }
-        public string Phone_No { get; set; }
-        public string Credit_Card_No { get; set; }
-        public int User_Id { get; set; }
+        public string PhoneNo { get; set; }
+        public string CreditCardNo { get; set; }
+        public int UserId { get; set; }
 
 
-        public User user;
+        public User UserObj { get; set; }
 
 
         public override string ToString()
@@ -28,16 +28,16 @@ namespace flight_management_system
 
         }
 
-        public Customer(int id, string first_Name, string last_Name, string address, string phone_No, string credit_Card_No, int user_Id, User user)
+        public Customer(int id, string firstName, string lastName, string address, string phoneNo, string creditCardNo, int userId, User userObj)
         {
             Id = id;
-            First_Name = first_Name;
-            Last_Name = last_Name;
+            FirstName = firstName;
+            LastName = lastName;
             Address = address;
-            Phone_No = phone_No;
-            Credit_Card_No = credit_Card_No;
-            User_Id = user_Id;
-            this.user = user;
+            PhoneNo = phoneNo;
+            CreditCardNo = creditCardNo;
+            UserId = userId;
+            UserObj = userObj;
         }
 
         public static bool operator ==(Customer  customer1, Customer  customer2)

@@ -60,7 +60,6 @@ namespace flight_management_system
             else
             {
                 my_logger.Info("Tried to write into Db while in read-pnly mode");
-                Console.WriteLine($"Not allow to write into DB. check config");
             }
 
             conn.Close();
@@ -69,7 +68,7 @@ namespace flight_management_system
 
 
 
-        public List<Country> GatAll()
+        public List<Country> GetAll()
         {
             List<Country> countries = new List<Country>();
 
@@ -88,19 +87,16 @@ namespace flight_management_system
                 var reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    my_logger.Info("in while- function GatAll return value");
-                    countries.Add(new Country {
-                          Id = Convert.ToInt32(reader["id_num"]),
-                          Name=reader["country_name"].ToString()
-                    
-                       });
-                
+                    my_logger.Info("in while- function GetAll return value");
+                    countries.Add(getCountryFromReader(reader));
+
+
                 }
             }
             catch (Exception ex)
             {
                 my_logger.Error($"Failed to get all countries. Error : {ex}");
-                my_logger.Error($"Run GatAll" +
+                my_logger.Error($"Run GetAll" +
                     $": [{sp_name}]");
             }
 
@@ -135,19 +131,15 @@ namespace flight_management_system
                 var reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    my_logger.Info("in if- function Gat return value");
-                    
-                    country= new Country
-                    {
-                        Id = Convert.ToInt32(reader["id_num"]),
-                        Name = reader["country_name"].ToString()
-                    };
+                    my_logger.Info("in if- function Get return value");
+
+                    country = getCountryFromReader( reader);
                 }
             }
             catch (Exception ex)
             {
                 my_logger.Error($"Failed to get country. Error : {ex}");
-                my_logger.Error($"Run Gat" +
+                my_logger.Error($"Run Get" +
                     $": [{sp_name}]");
             }
 
@@ -173,7 +165,7 @@ namespace flight_management_system
 
                     command.Parameters.AddRange(new NpgsqlParameter[]
                     {
-                    new NpgsqlParameter("country_id", item.Id)
+                    new NpgsqlParameter("remove_id", item.Id)
                     });
 
                     command.ExecuteNonQuery();
@@ -192,8 +184,18 @@ namespace flight_management_system
             else
             {
                 my_logger.Info("Tried to write into Db while in read-pnly mode");
-                Console.WriteLine($"Not allow to write into DB. check config");
             }
+        }
+
+        Country getCountryFromReader(NpgsqlDataReader reader)
+        {
+
+            return new Country
+            {
+                Id = Convert.ToInt32(reader["id"]),
+                Name = reader["country_name"].ToString()
+            };
+
         }
 
         public void Update(Country item)
@@ -234,7 +236,6 @@ namespace flight_management_system
             else
             {
                 my_logger.Info("Tried to write into Db while in read-pnly mode");
-                Console.WriteLine($"Not allow to write into DB. check config");
             }
         }
     }
