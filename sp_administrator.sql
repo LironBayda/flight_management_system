@@ -1,16 +1,18 @@
-CREATE OR REPLACE FUNCTION get_administrator(administrator_id int )
-returns TABLE(id_num int,first_name text,last_name text,administrator_level int, user_id bigint )
+drop FUNCTION get_administrator
+
+CREATE OR REPLACE FUNCTION get_administrator(administrator_id bigint )
+returns TABLE(id bigint,first_name text,last_name text,administrator_level int, user_id bigint )
  AS
     $$
     BEGIN
         RETURN QUERY
-        select * from administrators where id = administrator_id ;
+        select * from administrators a where a.id = administrator_id ;
        END;
 $$ LANGUAGE plpgsql;
 
 
 CREATE OR REPLACE FUNCTION get_administrators( )
-returns TABLE(id_num int,first_name text,last_name text,administrator_level int, user_id bigint )
+returns TABLE(id bigint,first_name text,last_name text,administrator_level int, user_id bigint )
  AS
     $$
     BEGIN
@@ -33,8 +35,7 @@ returns void
 $$ LANGUAGE plpgsql;
 
 
-
-CREATE OR REPLACE FUNCTION remove_administrator(administrator_id int)
+CREATE OR REPLACE FUNCTION remove_administrator(administrator_id bigint)
 returns void
  AS
     $$

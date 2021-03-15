@@ -1,16 +1,16 @@
 
 CREATE TABLE countries (
-	id  SERIAL PRIMARY KEY,
+	id   BIGSERIAL   PRIMARY KEY,
 	country_name TEXT
 );
 
 CREATE TABLE user_roles (
-	id  SERIAL PRIMARY KEY,
+	id   BIGSERIAL  PRIMARY KEY,
 	role_name TEXT unique
 );
 
 CREATE TABLE users (
-	id  SERIAL PRIMARY KEY   ,
+	id   BIGSERIAL  PRIMARY KEY   ,
 	username text unique,
 	user_password text,
 	email text unique,
@@ -21,33 +21,32 @@ CREATE TABLE users (
 
 
 
-CREATE TABLE airline_company (
-	id  SERIAL PRIMARY KEY   ,
+CREATE TABLE airline_companies (
+	id   BIGSERIAL  PRIMARY KEY   ,
 	airline_company_name text unique ,
 	country_id INT,
-	user_id INT unique,
+	user_id bigint unique,
 
     FOREIGN KEY (country_id) REFERENCES countries(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 
 );
-CREATE TABLE flight (
-	id  SERIAL PRIMARY KEY   ,
-	airline_company_id INT,
+CREATE TABLE flights (
+	id  BIGSERIAL  PRIMARY KEY   ,
+	airline_company_id bigint,
 	origin_country_id INT,
 	destination_country_id INT,
 	departure_time timestamp ,
 	landing_time timestamp,
 	remaining_tickets INT,
-    FOREIGN KEY (airline_company_id) REFERENCES countries(id),
+    FOREIGN KEY (destination_country_id) REFERENCES countries(id),
     FOREIGN KEY (origin_country_id) REFERENCES countries(id),
-    FOREIGN KEY (airline_company_id) REFERENCES airline_company(id)
+    FOREIGN KEY (airline_company_id) REFERENCES airline_companies(id)
 
 );
 
-
 CREATE TABLE customers (
-	id  SERIAL PRIMARY KEY   ,
+	id   BIGSERIAL  PRIMARY KEY   ,
 	first_name text,
 	last_name text,
 	address text,
@@ -59,17 +58,17 @@ CREATE TABLE customers (
 );
 
 CREATE TABLE tickets (
-	id  SERIAL PRIMARY KEY,
+	id  BIGSERIAL  PRIMARY KEY,
 	flight_id bigint,
 	customer_id bigint,
 	unique (customer_id,flight_id),
-	FOREIGN KEY (flight_id) REFERENCES flight(id),
+	FOREIGN KEY (flight_id) REFERENCES flights(id),
     FOREIGN KEY (customer_id) REFERENCES customers(id)
 
 );
 
 CREATE TABLE administrators (
-	id  SERIAL PRIMARY KEY,
+	id  BIGSERIAL  PRIMARY KEY,
 	first_name text,
 	last_name text,
 	administrator_level int,
